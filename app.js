@@ -16,8 +16,9 @@ var commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index");
 
-// mongoose.connect("mongodb://localhost/yelp_camp", {useNewUrlParser: true});
-mongoose.connect("mongodb+srv://azhang:azhang@cluster1-n4psa.mongodb.net/test?retryWrites=true", {
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
+
+mongoose.connect(url, {
     useNewUrlParser: true,
     useCreateIndex: true
 }).then(() => {
@@ -25,7 +26,6 @@ mongoose.connect("mongodb+srv://azhang:azhang@cluster1-n4psa.mongodb.net/test?re
 }).catch(err => {
     console.log("ERROR: ", err.message);
 });
-
 
 mongoose.set('useFindAndModify', false);
 app.use(bodyParser.urlencoded({extended: true}));
