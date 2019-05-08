@@ -9,8 +9,8 @@ router.get("/", function(req, res) {
 });
 
 // Show register form
-router.get("/register", function(req, res) {
-    res.render("register");
+router.get("/register", function(req, res){
+   res.render("register", {page: 'register'});
 });
 
 // Handle register logic
@@ -18,6 +18,7 @@ router.post("/register", function(req, res) {
     var newUser = new User({username: req.body.username});
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
+            console.log(err);
             req.flash("error", err.message);
             return res.redirect("/register");
         }
@@ -30,7 +31,7 @@ router.post("/register", function(req, res) {
 
 // Show login form
 router.get("/login", function(req, res) {
-    res.render("login");
+    res.render("login", {page: 'login'});
 });
 
 // Handle login logic
